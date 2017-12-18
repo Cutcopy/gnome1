@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset="utf-8">
+    <title>{{page.title}}</title>
+
+   <!-- Meta Junk -->
+    <meta name="description" content="{{site.description}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+   <!-- Facebook -->
+    <meta property="og:site_name" content="{{site.title}} ">
+    <meta property="og:type" content="Website">
+    <meta property="og:url" content="{{site.url}}{{page.url}} ">
+    <meta property="og:title" content="{{page.title}}">
+    <meta property="og:description" content="{{site.description}}">
+    <meta property="og:image" content="{{site.url}}/img/Hatcx_logo.png">
+
+   <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#2DCCD3">
+
+   <!-- CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    {% css main %}
+  </head>
+  <body>
+    {% include nav.html %}
+    <div class="post-image-header">
+      <div style='background-image: url("{{page.img_preview}}"); height: 50vh; background-size: cover;'></div>
+    </div>
+    <header>
+      <div class="container">
+        <h1>{{page.title}}</h1>
+        <p class="lead">{{page.excerpt}}</p>
+        <p>{{page.date | date: "%a. %b %d, %y"}} | <a href="#">{{page.author}}</a></p>
+        <em>in {% for category in page.categories %} <a href="#">{{category}}</a> {% endfor %}</em>
+        <hr>
+      </div>
+    </header>
+    <main class="container">
+      <div class="row p-3">
+        {{content}}
+      </div>
+      <div class="row">
+        <div class="col align-self-center text-center">
+          <p class="display-3">Share</p>
+          <hr>
+          <div class="btn-group" role="group">
+            <a href="#" class="btn btn-primary mr-1">Facebook</a>
+            <a href="#" class="btn btn-primary mr-1">Twitter</a>
+            <a href="#" class="btn btn-primary">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <section class="container">
+      <h2 class="text-uppercase mt-3">More On This Subject</h2>
+      <div class="row">
+        {% for post in site.related_posts limit:5 %}
+          {% assign match = false %}
+          {% for category in post.categories %}
+            {% if page.categories contains category %}
+              {% assign match = true %}
+            {% endif %}
+          {% endfor %}
+          {% if match %}
+            <div class="col-xl-4 mb-3">
+              <div class="card">
+                <a href="{{ post.url }}">
+                  <img class="card-img-top" src="{{post.img_preview}}" alt="Card image cap" style="max-height: 180px;">
+                </a>
+                <div class="card-body">
+                  <a href="{{ post.url }}">
+                    <p class="card-text">{{ post.title }}</p>
+                  </a>
+                  <hr>
+                  <p><span>{{post.date | date: "%m.%d.%y" }}</span> | <a href="#"> {{post.author}}</a></p>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% include footer.html %}
+    {% js main %}
+  </body>
+</html>

@@ -1,0 +1,103 @@
+# Site Vars
+title: HATCX - Linking humans to their health
+email: contact@HATCX.com
+description: > # this means to ignore newlines until "baseurl:"
+  HATCX is an Omaha, NE  based technology solutions company, focusing on healthcare
+baseurl: '' # the subpath of your site, e.g. /blog
+url: 'localhost:4000' # the base hostname & protocol for your site
+
+# Socials
+facebook: 'https://www.facebook.com/hatcxhealth/'
+twitter: 'https://twitter.com/HATCX_HEALTH'
+linkedin: 'https://www.linkedin.com/company-beta/15144701/'
+typography-account: '7488996'
+
+# Analytics
+ga-tracking-id: 'UA-90612427-2' # hatcx-dev.azurewebsites.net
+di-account-id: '11309'
+di-property-id: '86269'
+
+##### -=-=-=-=-=-= Build settings
+
+# This effects urls.
+permalink: pretty
+markdown: kramdown
+livereload: true
+sass:
+  style: compressed
+
+# Plugins
+gems:
+  - jekyll-sitemap
+  - jekyll-assets
+  - uglifier
+  - jekyll-livereload
+exclude:
+  - 'README.md'
+  - .asset-cache
+include: ['.well-known']
+
+# Toggles sections 2-4 on Cost Page, as they serve little purpose until we have a video and a form.
+MVP: true
+# This is all the sections for the main page. Used in the CSS and JS files.
+sections: "'upTop','products', 'about', 'whoWeAre', 'careers', 'flexibleHours','events', 'casual','breakTime', 'vacation','bestPeeps','jobs','roadAhead'"
+
+#cost variables
+cost:
+  gplay: https://play.google.com/store/apps/details?id=com.hatcx.cost
+  apple_store: https://itunes.apple.com/us/app/hatcx-cost/id1230103884
+  video: https://www.youtube.com/embed/he8_XjNJCHM
+  twitter_share: https://twitter.com/home?status=Check%20out%20this%20awesome%20new%20health%20cost%20saving%20app%3A%20https%3A//hatcx.com/cost
+  fb_share: https://www.facebook.com/sharer/sharer.php?u=https%3A//hatcx.com/cost
+
+# JERBS
+collections:
+  positions:
+    output: true
+    permalink:  /:collection/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: positions
+    values:
+      layout: job
+      link: http://www.emailmeform.com/builder/form/Vc7T2AbDfiQhCgwkG468e
+
+# Assets Pipeline
+assets:
+  compress:
+    css: true
+    js: true
+
+  #
+
+  autowrite: true
+  cache: .asset-cache
+  cache_type: filesystem
+  skip_baseurl_with_cdn: false
+  skip_prefix_with_cdn: false
+  prefix: "/assets"
+
+  assets:
+    - "*.png"
+    - "*.jpg"
+    - "main.js"
+    - "cost.js"
+    - "ga.js"
+    - "main.css"
+    - "costMain.css"
+
+  sources:
+    - _assets/img
+    - _assets/js
+    - _assets/css
+    - _assets/css/_sass
+
+  features:
+    liquid: true
+    integrity: false
+    # This will add height and width attributes for an img tag.
+    automatic_img_size: false
+    # This will add the digest path as an alt attribute for an img tag.
+    automatic_img_alt : false
